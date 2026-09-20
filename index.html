@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="index.js"></script>
 
-<title>Mondayyyyyyy</title>
+<title>Kal Ka Plan? 👀</title>
 
 <style>
 
@@ -688,6 +688,98 @@ body{
 }
 
 
+
+/* =========================
+   DRAMATIC CONVINCE SCREEN
+========================= */
+
+#convince{
+    text-align:center;
+}
+
+.convince-badge{
+    display:inline-block;
+    background:#fff1f3;
+    color:#d85b70;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:18px;
+}
+
+.convince h2{
+    font-family:"Playfair Display",serif;
+    font-size:32px;
+    line-height:1.25;
+    margin-bottom:14px;
+}
+
+.convince-text{
+    color:#777f8e;
+    font-size:13px;
+    line-height:1.8;
+    margin-bottom:24px;
+}
+
+.convince-card{
+    background:linear-gradient(135deg,#f8f9ff,#fff7f8);
+    border:1px solid #edf0f4;
+    border-radius:20px;
+    padding:24px 20px;
+    margin-bottom:20px;
+}
+
+.convince-card .big{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.convince-card p{
+    color:#626a79;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.convince-actions{
+    display:grid;
+    gap:10px;
+}
+
+.convince-btn{
+    width:100%;
+    border:none;
+    padding:15px 16px;
+    border-radius:14px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.convince-yes{
+    background:#202532;
+    color:#fff;
+}
+
+.convince-no{
+    background:#f3f4f7;
+    color:#626a79;
+    border:1px solid #e5e7ec;
+}
+
+.convince-btn:hover{
+    transform:translateY(-2px);
+}
+
+.convince-count{
+    margin-top:16px;
+    color:#a0a6b1;
+    font-size:10px;
+}
+
 /* =========================
    MOBILE
 ========================= */
@@ -773,7 +865,9 @@ body{
             <br>
 
             Isliye bina kisi confusion ke
-            ek proper decision lete hain. 😂
+            aaj ek <b>proper decision</b> lete hain. 😂
+            <br>
+            Aur haan... mere option ko jaldi dismiss mat karna.
 
         </p>
 
@@ -844,6 +938,63 @@ body{
 
     </section>
 
+
+
+    <!-- =========================
+         DRAMATIC CONVINCE
+    ========================== -->
+
+    <section id="convince" class="convince hidden">
+
+        <div class="convince-badge" id="convinceBadge">
+            RUKO ZARA...
+        </div>
+
+        <h2 id="convinceTitle">
+            Ruko zara...
+        </h2>
+
+        <p class="convince-text" id="convinceText">
+            Itni jaldi decision? Ek baar aur soch lo...
+        </p>
+
+        <div class="convince-card">
+            <div class="big" id="convinceEmoji">🙂</div>
+
+            <p id="convinceMessage">
+                Kal 8 se 2 tak ka scene hai.
+                Ghoomna, kuch khaana, thodi masti...
+                aur 2 baje tak safely ghar drop.
+                <br><br>
+                Destination mujhe bhi nahi pata 😂
+                <br>
+                <b>But trust me, KMSM se bahut maza aayega. 👀</b>
+            </p>
+        </div>
+
+        <div class="convince-actions">
+
+            <button
+                class="convince-btn convince-yes"
+                onclick="reconsider()"
+            >
+                Theek Hai... Sochti Hoon
+            </button>
+
+            <button
+                class="convince-btn convince-no"
+                onclick="rejectConvince()"
+            >
+                Nahi, pakka nahi
+            </button>
+
+        </div>
+
+        <div class="convince-count" id="convinceCount">
+            Convincing attempt 1 of 3
+        </div>
+
+    </section>
 
 
     <!-- =========================
@@ -1536,6 +1687,8 @@ let answers = {
 
 };
 
+let convinceAttempt = 1;
+
 
 /* =========================
    START
@@ -1604,7 +1757,7 @@ function validate(){
     if(key && !answers[key]){
 
         alert(
-            "Pehle ek option select karo 👀"
+            "Pehle ek option select karo "
         );
 
         return false;
@@ -1640,7 +1793,7 @@ function next(){
         answers.plan !== "me"
     ){
 
-        alternative();
+        showConvince();
 
         return;
 
@@ -1743,6 +1896,130 @@ function update(){
 
 
 /* =========================
+   DRAMATIC CONVINCE
+========================= */
+
+function showConvince(){
+
+    document
+        .getElementById("form")
+        .classList.add("hidden");
+
+    document
+        .getElementById("convince")
+        .classList.remove("hidden");
+
+    convinceAttempt = 1;
+
+    renderConvince();
+}
+
+
+function renderConvince(){
+
+    const title = document.getElementById("convinceTitle");
+    const text = document.getElementById("convinceText");
+    const emoji = document.getElementById("convinceEmoji");
+    const message = document.getElementById("convinceMessage");
+    const badge = document.getElementById("convinceBadge");
+    const count = document.getElementById("convinceCount");
+
+    const selected = answers.plan === "yashveer"
+        ? "Yashveer ke saath"
+        : "classmates ke saath";
+
+    if(convinceAttempt === 1){
+
+        badge.innerText = "RUKZA Zraa.....";
+        title.innerHTML = "Itni jaldi decision?";
+        text.innerHTML =
+            `${selected}  jaana hai, theek hai...<br>
+             lekin mere option ko bhi ek baar properly consider kar lo.`;
+
+        emoji.innerText = "🙂";
+
+        message.innerHTML =
+            `Kal 8 se 2 tak ka simple sa plan hai —
+             thoda ghoomna, kuch khaana aur bas enjoy karna.
+             <br><br>
+             Aur haan, <b>2 baje tak vpss safely drop.</b>`;
+    }
+
+    else if(convinceAttempt === 2){
+
+        badge.innerText = "EK BAAR AUR...";
+        title.innerHTML = "Achha... samajh gaya.";
+        text.innerHTML =
+            `Lekin decision lene se pehle ek baar aur soch lo.`;
+
+        emoji.innerText = "🙂";
+
+        message.innerHTML =
+            `Destination mujhe bhi nahi pata, honestly.
+             <br><br>
+             Bas itna keh sakta hoon ki
+             <b>KMSM se kaafi maza aayega.</b>
+             <br><br>
+             No overplanning. Bas nikalenge aur dekhte hain kahan pahuchte hain.`;
+    }
+
+    else{
+
+        badge.innerText = "LAST ATTEMPT";
+
+        title.innerHTML = "Theek hai, last attempt.";
+
+        text.innerHTML =
+            `Iske baad main bilkul nahi manaunga.`;
+
+        emoji.innerText = "🙂";
+
+        message.innerHTML =
+            `Kal 8 se 2 tak.
+             Ghoomna, kuch khaana, thodi masti —
+             aur 2 baje tak safely back.
+             <br><br>
+             <b>Bas ek baar mere saath chal ke dekh lo.</b>`;
+    }
+
+    count.innerText =
+        `Convincing attempt ${convinceAttempt} of 3`;
+}
+
+function reconsider(){
+
+    answers.plan = "me";
+
+    document
+        .getElementById("convince")
+        .classList.add("hidden");
+
+    current = 2;
+
+    document
+        .getElementById("form")
+        .classList.remove("hidden");
+
+    update();
+}
+
+
+function rejectConvince(){
+
+    if(convinceAttempt < 3){
+
+        convinceAttempt++;
+
+        renderConvince();
+
+        return;
+    }
+
+    alternative();
+}
+
+
+/* =========================
    ALTERNATIVE
 ========================= */
 
@@ -1774,9 +2051,11 @@ function alternative(){
         .getElementById("finalText")
         .innerHTML =
         `
-        Fair enough. 😌
+        Theek hai, samajh gaya.
         <br>
-        Existing plan it is.
+        Decision respected.
+        <br>
+        Maine apni taraf se poori koshish kar li.
         `;
 
 
