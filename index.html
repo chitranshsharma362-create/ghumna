@@ -1,0 +1,1855 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="index.js"></script>
+
+<title>Kal Ka Plan? 👀</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+
+    font-family:"DM Sans",sans-serif;
+
+    background:
+        radial-gradient(circle at 5% 5%,#dce9ff,transparent 28%),
+        radial-gradient(circle at 95% 95%,#ffe0e8,transparent 30%),
+        #f7f8fc;
+
+    color:#202532;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+    width:100%;
+    max-width:650px;
+
+    background:rgba(255,255,255,.96);
+
+    border:1px solid #e9ebf1;
+
+    border-radius:28px;
+
+    padding:38px;
+
+    box-shadow:
+        0 25px 70px rgba(35,45,70,.12);
+
+    position:relative;
+    overflow:hidden;
+}
+
+
+/* =========================
+   TOP
+========================= */
+
+.top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+}
+
+.brand{
+
+    font-size:14px;
+    font-weight:700;
+}
+
+.brand span{
+    color:#5278e8;
+}
+
+.badge{
+
+    font-size:10px;
+
+    color:#6d7585;
+
+    background:#f3f5f9;
+
+    padding:7px 12px;
+
+    border-radius:20px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+    text-align:center;
+}
+
+.small-label{
+
+    display:inline-block;
+
+    background:#edf3ff;
+
+    color:#5278e8;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:20px;
+}
+
+.intro h1{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:43px;
+
+    line-height:1.15;
+
+    margin-bottom:18px;
+}
+
+.intro h1 span{
+    color:#5278e8;
+}
+
+.intro > p{
+
+    color:#777f8e;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+   PLAN CARD
+========================= */
+
+.plan-card{
+
+    margin:28px 0;
+
+    padding:22px;
+
+    background:#fafbfc;
+
+    border:1px solid #edf0f4;
+
+    border-radius:19px;
+
+    text-align:left;
+}
+
+.plan-title{
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:13px;
+}
+
+.plan-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    font-size:13px;
+
+    color:#747c8b;
+
+    line-height:1.7;
+
+    margin:8px 0;
+}
+
+.plan-item b{
+    color:#303642;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.primary{
+
+    width:100%;
+
+    border:none;
+
+    background:#202532;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.primary:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(30,35,50,.18);
+}
+
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:11px;
+
+    color:#89909e;
+
+    margin-bottom:8px;
+}
+
+.progress-bg{
+
+    height:6px;
+
+    background:#edf0f5;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:34px;
+}
+
+.progress{
+
+    height:100%;
+
+    width:20%;
+
+    background:#5278e8;
+
+    border-radius:20px;
+
+    transition:.4s;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question{
+    display:none;
+
+    animation:slide .35s ease;
+}
+
+.question.active{
+    display:block;
+}
+
+@keyframes slide{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.q-number{
+
+    color:#5278e8;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    margin-bottom:10px;
+}
+
+.question h2{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:30px;
+
+    line-height:1.25;
+
+    margin-bottom:12px;
+}
+
+.question-sub{
+
+    color:#858c99;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options{
+
+    display:grid;
+
+    gap:12px;
+}
+
+.option{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:16px;
+
+    background:#fff;
+
+    border:1.5px solid #e4e7ed;
+
+    border-radius:15px;
+
+    text-align:left;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.option:hover{
+
+    border-color:#5278e8;
+
+    background:#f8faff;
+
+    transform:translateX(4px);
+}
+
+.option.selected{
+
+    border-color:#5278e8;
+
+    background:#edf3ff;
+}
+
+.icon{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#f4f6f9;
+
+    border-radius:12px;
+
+    font-size:19px;
+}
+
+.option strong{
+
+    display:block;
+
+    font-size:14px;
+
+    margin-bottom:3px;
+}
+
+.option small{
+
+    color:#8b92a0;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   INFO BOX
+========================= */
+
+.info-box{
+
+    background:#f8f9fc;
+
+    border:1px solid #edf0f4;
+
+    border-radius:18px;
+
+    padding:21px;
+
+    margin-bottom:20px;
+}
+
+.info-box .heading{
+
+    font-weight:700;
+
+    font-size:13px;
+
+    margin-bottom:10px;
+}
+
+.info-box p{
+
+    font-size:13px;
+
+    color:#777f8d;
+
+    line-height:1.8;
+}
+
+.highlight{
+
+    color:#202532;
+
+    font-weight:600;
+}
+
+
+/* =========================
+   DESTINATION BOX
+========================= */
+
+.destination{
+
+    text-align:center;
+
+    padding:28px 20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f8ff,
+            #fbf6f8
+        );
+
+    border:1px solid #edf0f4;
+
+    margin-bottom:20px;
+}
+
+.destination .emoji{
+
+    font-size:38px;
+
+    margin-bottom:10px;
+}
+
+.destination h3{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:23px;
+
+    margin-bottom:8px;
+}
+
+.destination p{
+
+    color:#7d8593;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navigation{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:32px;
+}
+
+.back{
+
+    border:none;
+
+    background:transparent;
+
+    color:#9298a5;
+
+    padding:12px;
+
+    font-family:inherit;
+
+    cursor:pointer;
+}
+
+.next{
+
+    border:none;
+
+    background:#202532;
+
+    color:white;
+
+    padding:13px 25px;
+
+    border-radius:13px;
+
+    font-family:inherit;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.next:hover{
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+
+    text-align:center;
+}
+
+.final-icon{
+
+    font-size:58px;
+
+    margin-bottom:18px;
+}
+
+.final h1{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:39px;
+
+    margin-bottom:15px;
+}
+
+.final > p{
+
+    color:#7b8290;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* SUMMARY */
+
+.summary{
+
+    margin:28px 0;
+
+    border:1px solid #e7eaf0;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    text-align:left;
+}
+
+.summary-head{
+
+    padding:13px 17px;
+
+    background:#f7f8fb;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    color:#697181;
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:14px 17px;
+
+    border-top:1px solid #edf0f4;
+
+    font-size:13px;
+
+    gap:15px;
+}
+
+.summary-row span{
+    color:#8a91a0;
+}
+
+.summary-row strong{
+    text-align:right;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    body{
+        padding:12px;
+    }
+
+    .card{
+        padding:27px 20px;
+        border-radius:23px;
+    }
+
+    .intro h1{
+        font-size:34px;
+    }
+
+    .question h2{
+        font-size:26px;
+    }
+
+    .final h1{
+        font-size:32px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="card">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="top">
+
+        <div class="brand">
+            Tomorrow<span>Plan</span>
+        </div>
+
+        <div class="badge">
+            DECISION REQUIRED
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <section id="intro" class="intro">
+
+        <div class="small-label">
+            ONE SMALL DECISION
+        </div>
+
+
+        <h1>
+
+            Kal ka plan...
+            <br>
+
+            <span>thoda interesting</span>
+            ho sakta hai.
+
+        </h1>
+
+
+        <p>
+
+            Mujhe pata hai kal ke already
+            kuch plans hain.
+            <br>
+
+            Isliye bina kisi confusion ke
+            ek proper decision lete hain. 😂
+
+        </p>
+
+
+        <div class="plan-card">
+
+            <div class="plan-title">
+                Abhi tak jo options hain:
+            </div>
+
+
+            <div class="plan-item">
+
+                🛍️
+
+                <span>
+                    <b>Yashveer ke saath</b> shopping
+                    ka plan already hai.
+                </span>
+
+            </div>
+
+
+            <div class="plan-item">
+
+                👥
+
+                <span>
+                    <b>Classmates ke saath</b> bhi
+                    jaa sakti ho.
+                </span>
+
+            </div>
+
+
+            <div class="plan-item">
+
+                
+
+                <span>
+                    Aur ek option...
+                    <b>mere saath thoda ghoomna.</b>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <p style="margin-bottom:20px">
+
+            Ab dekhte hain kal ka plan
+            <br>
+
+            <b>kis direction mein jaata hai. </b>
+
+        </p>
+
+
+        <button
+            class="primary"
+            onclick="start()"
+        >
+
+            Chalo Decision Karte Hain →
+
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         FORM
+    ========================== -->
+
+    <section
+        id="form"
+        class="hidden"
+    >
+
+
+        <div class="progress-info">
+
+            <span id="counter">
+                Question 1 of 5
+            </span>
+
+            <span id="percent">
+                20%
+            </span>
+
+        </div>
+
+
+        <div class="progress-bg">
+
+            <div
+                class="progress"
+                id="progress"
+            ></div>
+
+        </div>
+
+
+
+        <!-- =================
+             Q1
+        ================== -->
+
+        <div
+            class="question active"
+            data-q="1"
+        >
+
+            <div class="q-number">
+                01 — FIRST DECISION
+            </div>
+
+
+            <h2>
+
+                Toh...
+                <br>
+
+                kal jaana kis ke saath hai?
+
+            </h2>
+
+
+            <p class="question-sub">
+
+                Simple question.
+                Soch samajh ke answer dena.
+
+            </p>
+
+
+            <div class="options">
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'plan','yashveer')"
+                >
+
+                    <div class="icon">
+                        🛍️
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Yashveer ke saath
+                        </strong>
+
+                        <small>
+                            Shopping plan
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'plan','classmates')"
+                >
+
+                    <div class="icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Classmates ke saath
+                        </strong>
+
+                        <small>
+                            Group outing
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'plan','me')"
+                >
+
+                    <div class="icon">
+                        😃
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mere saath
+                        </strong>
+
+                        <small>
+                            Let's see where we end up.
+                        </small>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================
+             Q2
+        ================== -->
+
+        <div
+            class="question"
+            data-q="2"
+        >
+
+            <div class="q-number">
+                02 — THE PLAN
+            </div>
+
+
+            <h2>
+
+                Destination kya hai?
+
+            </h2>
+
+
+            <div class="destination">
+
+                <div class="emoji">
+                    📍
+                </div>
+
+
+                <h3>
+                    Honestly...
+                    mujhe bhi nahi pata. 
+                </h3>
+
+
+                <p>
+
+                    Koi fixed destination nahi hai , kbhi kbhi bina destination ke bhi chlna chiye.
+
+                    <br>
+
+                    Bas itna pata hai ki
+                    <b>Bhout mjaa aane vala hai.</b>
+
+                    <br><br>
+
+                    Trust me. 
+
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="heading">
+                    Ek condition hai:
+                </div>
+
+                <p>
+
+                    Plan ka point koi famous jagah
+                    tick karna nahi hai.
+
+                    <br>
+
+                    <span class="highlight">
+                        Bas 8 baje niklenge,
+                        kuch accha explore karenge,
+                        aur 2 baje tak safely wapas.
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================
+             Q3
+        ================== -->
+
+        <div
+            class="question"
+            data-q="3"
+        >
+
+            <div class="q-number">
+                03 — TIME
+            </div>
+
+
+            <h2>
+
+                Time fixed hai.
+
+                <br>
+
+                Kya bolti ho?
+
+            </h2>
+
+
+            <div class="info-box">
+
+                <div class="heading">
+                    🕗 8:00 AM — 🕑 2:00 PM
+                </div>
+
+                <p>
+
+                    Subah around <b>8 baje</b>
+                    nikalenge.
+
+                    <br>
+
+                    Aur maximum <b>2 baje tak
+                    safely drop</b> kar dunga.
+
+                    <br><br>
+
+                    Matlab full day ka scene nahi hai —
+                    bas ek proper morning outing.
+
+                </p>
+
+            </div>
+
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="choose(this,'time','yes')"
+                >
+
+                    <div class="icon">
+                        👍
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Perfect
+                        </strong>
+
+                        <small>
+                            8–2 works for me
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'time','maybe')"
+                >
+
+                    <div class="icon">
+                        🤔
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Hmm... dekhte hain
+                        </strong>
+
+                        <small>
+                            Still thinking
+                        </small>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================
+             Q4
+        ================== -->
+
+        <div
+            class="question"
+            data-q="4"
+        >
+
+            <div class="q-number">
+                04 — TRANSPORT
+            </div>
+
+
+            <h2>
+
+                Aana jaana kaise?
+
+            </h2>
+
+
+            <p class="question-sub">
+
+                Bas do options hain.
+                Simple rakha hai. 😌
+
+            </p>
+
+
+            <div class="options">
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'transport','scooty')"
+                >
+
+                    <div class="icon">
+                        🛵
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            My Scooty
+                        </strong>
+
+
+                    </div>
+
+                </button>
+
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'transport','bike')"
+                >
+
+                    <div class="icon">
+                        🏍️
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Your Bike
+                        </strong>
+
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================
+             Q5
+        ================== -->
+
+        <div
+            class="question"
+            data-q="5"
+        >
+
+            <div class="q-number">
+                05 — FINAL QUESTION
+            </div>
+
+
+            <h2>
+
+                Okiee Haann too.....
+
+                <br>
+
+                Chalee firr ??
+
+            </h2>
+
+
+            <div class="info-box">
+
+                <div class="heading">
+                    Proposed Plan
+                </div>
+
+                <p>
+
+                    🕗 8 AM — Leave
+
+                    <br>
+
+                    📍 Destination — Surprise / undecided
+
+                    <br>
+
+                    😎 Explore + masti + kuch khaana
+
+                    <br>
+
+                    🕑 2 PM — Safely back & drop
+
+                    <br><br>
+
+                    <b>
+                        Koi overplanning nahi.
+                        Bas nikalte hain aur dekhte hain. 
+                    </b>
+
+                </p>
+
+            </div>
+
+
+            <div class="options">
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'final','yes')"
+                >
+
+                    <div class="icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Haan, let's go.
+                        </strong>
+
+                        <small>
+                            Plan locked.
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+
+                <button
+                    class="option"
+                    onclick="choose(this,'final','think')"
+                >
+
+                    <div class="icon">
+                        🤔
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Ek baar aur sochne do.
+                        </strong>
+
+                        <small>
+                            Decision pending.
+                        </small>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAV -->
+
+        <div class="navigation">
+
+            <button
+                class="back"
+                id="back"
+                onclick="previous()"
+            >
+                ← Back
+            </button>
+
+
+            <button
+                class="next"
+                id="next"
+                onclick="next()"
+            >
+                Continue →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FINAL
+    ========================== -->
+
+    <section
+        id="final"
+        class="final hidden"
+    >
+
+        <div
+            class="final-icon"
+            id="finalIcon"
+        >
+            🎉
+        </div>
+
+
+        <h1 id="finalTitle">
+            Plan Locked.
+        </h1>
+
+
+        <p id="finalText">
+
+            Okay then.
+            <br>
+
+            Kal ka plan officially on. 😎
+
+        </p>
+
+
+        <div class="summary">
+
+            <div class="summary-head">
+                TOMORROW'S PLAN
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    With
+                </span>
+
+                <strong id="summaryPlan">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Time
+                </span>
+
+                <strong>
+                    8 AM — 2 PM
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Transport
+                </span>
+
+                <strong id="summaryTransport">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Destination
+                </span>
+
+                <strong>
+                    Surprise 👀
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <p>
+
+            Destination abhi secret hai.
+            😂
+
+            <br>
+
+            <b>
+                Bas kal time pe ready rehna.
+            </b>
+
+        </p>
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   DATA
+========================= */
+
+let current = 1;
+
+const total = 5;
+
+
+let answers = {
+
+    plan:"",
+    time:"",
+    transport:"",
+    final:""
+
+};
+
+
+/* =========================
+   START
+========================= */
+
+function start(){
+
+    document
+        .getElementById("intro")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("form")
+        .classList.remove("hidden");
+
+
+    update();
+
+}
+
+
+/* =========================
+   CHOOSE
+========================= */
+
+function choose(button,type,value){
+
+    button
+        .parentElement
+        .querySelectorAll(".option")
+        .forEach(btn =>
+            btn.classList.remove("selected")
+        );
+
+
+    button.classList.add("selected");
+
+
+    answers[type] = value;
+
+}
+
+
+/* =========================
+   VALIDATE
+========================= */
+
+function validate(){
+
+    let key;
+
+    if(current === 1)
+        key = "plan";
+
+    if(current === 3)
+        key = "time";
+
+    if(current === 4)
+        key = "transport";
+
+    if(current === 5)
+        key = "final";
+
+
+    if(key && !answers[key]){
+
+        alert(
+            "Pehle ek option select karo 👀"
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function next(){
+
+    if(!validate())
+        return;
+
+
+    /*
+       MAIN CONDITION:
+
+       Agar user mere saath nahi
+       choose karta, form yahin
+       respectfully end.
+    */
+
+    if(
+        current === 1 &&
+        answers.plan !== "me"
+    ){
+
+        alternative();
+
+        return;
+
+    }
+
+
+    if(current < total){
+
+        current++;
+
+        update();
+
+    }
+    else{
+
+        submit();
+
+    }
+
+}
+
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function previous(){
+
+    if(current > 1){
+
+        current--;
+
+        update();
+
+    }
+
+}
+
+
+/* =========================
+   UPDATE
+========================= */
+
+function update(){
+
+    document
+        .querySelectorAll(".question")
+        .forEach(q =>
+            q.classList.remove("active")
+        );
+
+
+    document
+        .querySelector(
+            `.question[data-q="${current}"]`
+        )
+        .classList.add("active");
+
+
+    document
+        .getElementById("counter")
+        .innerText =
+        `Question ${current} of ${total}`;
+
+
+    let percentage =
+        Math.round(
+            (current / total) * 100
+        );
+
+
+    document
+        .getElementById("percent")
+        .innerText =
+        `${percentage}%`;
+
+
+    document
+        .getElementById("progress")
+        .style.width =
+        `${percentage}%`;
+
+
+    document
+        .getElementById("back")
+        .style.visibility =
+        current === 1
+        ? "hidden"
+        : "visible";
+
+
+    document
+        .getElementById("next")
+        .innerText =
+        current === total
+        ? "Lock The Plan 🔒"
+        : "Continue →";
+
+}
+
+
+/* =========================
+   ALTERNATIVE
+========================= */
+
+function alternative(){
+
+    document
+        .getElementById("form")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("final")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("finalIcon")
+        .innerText =
+        "📋";
+
+
+    document
+        .getElementById("finalTitle")
+        .innerText =
+        "Decision Recorded.";
+
+
+    document
+        .getElementById("finalText")
+        .innerHTML =
+        `
+        Fair enough. 😌
+        <br>
+        Existing plan it is.
+        `;
+
+
+    document
+        .getElementById("summaryPlan")
+        .innerText =
+        answers.plan === "yashveer"
+        ? "Yashveer — Shopping"
+        : "Classmates";
+
+
+    document
+        .getElementById("summaryTransport")
+        .innerText =
+        "Existing plan";
+
+}
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+function submit(){
+
+    document
+        .getElementById("form")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("final")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("finalIcon")
+        .innerText =
+        "🎉";
+
+
+    document
+        .getElementById("finalTitle")
+        .innerText =
+        "Plan Locked.";
+
+
+    document
+        .getElementById("finalText")
+        .innerHTML =
+        `
+        Alright then. 😎
+        <br>
+        Kal ka plan officially on.
+        `;
+
+
+    document
+        .getElementById("summaryPlan")
+        .innerText =
+        "Mere saath";
+
+
+    document
+        .getElementById("summaryTransport")
+        .innerText =
+        answers.transport === "scooty"
+        ? "Her Scooty"
+        : "My Bike";
+
+}
+
+</script>
+
+</body>
+</html>
